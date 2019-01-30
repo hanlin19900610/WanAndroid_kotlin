@@ -15,8 +15,6 @@ import com.mufeng.wanandroid.utils.ext.showToast
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
-import com.squareup.leakcanary.LeakCanary
-import com.squareup.leakcanary.RefWatcher
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.beta.upgrade.UpgradeStateListener
@@ -27,7 +25,6 @@ import kotlin.properties.Delegates
 
 class App: MultiDexApplication() {
 
-    private var refWatcher: RefWatcher? = null
 
     companion object {
         private val TAG = "App"
@@ -37,18 +34,12 @@ class App: MultiDexApplication() {
 
         lateinit var instance: Application
 
-        fun getRefWatcher(context: Context): RefWatcher? {
-            val app = context.applicationContext as App
-            return app.refWatcher
-        }
-
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
         context = applicationContext
-        refWatcher = setupLeakCanary()
         initConfig()
         DisplayManager.init(this)
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
@@ -141,12 +132,6 @@ class App: MultiDexApplication() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-    }
-
-    private fun setupLeakCanary(): RefWatcher {
-        return if (LeakCanary.isInAnalyzerProcess(this)) {
-            RefWatcher.DISABLED
-        } else LeakCanary.install(this)
     }
 
     /**

@@ -113,7 +113,7 @@ abstract class BaseFragment : Fragment(){
         if (useEventBus()) {
             EventBus.getDefault().unregister(this)
         }
-        activity?.let { App.getRefWatcher(it)?.watch(activity) }
+//        activity?.let { App.getRefWatcher(it)?.watch(activity) }
     }
 
 }

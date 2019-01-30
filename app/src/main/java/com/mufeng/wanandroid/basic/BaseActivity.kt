@@ -260,7 +260,6 @@ abstract class BaseActivity : AppCompatActivity() {
             EventBus.getDefault().unregister(this)
         }
         CommonUtil.fixInputMethodManagerLeak(this)
-        App.getRefWatcher(this)?.watch(this)
     }
 
     override fun finish() {
