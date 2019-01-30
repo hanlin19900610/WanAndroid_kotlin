@@ -2,7 +2,7 @@ package com.mufeng.wanandroid.constant
 
 object Constant {
 
-    const val BUGLY_ID = "76e2b2867d"
+    const val BUGLY_ID = "d8b7aabdcd"
 
     const val BASE_URL = "http://www.wanandroid.com/"
 
